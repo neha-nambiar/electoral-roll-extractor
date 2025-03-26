@@ -1,0 +1,8 @@
+opencv-python
+numpy
+pandas
+pytesseract
+Pillow
+pdf2image
+openpyxl
+tqdm
