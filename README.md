@@ -4,61 +4,42 @@
 
 This tool automatically extracts voter information from scanned electoral roll PDFs and converts it into structured data formats (CSV/Excel) for easy analysis and use.
 
-### System Workflow
+## System Workflow
 
 ```mermaid
-flowchart TD
-    subgraph PDF_Processing
-        A[Load PDF] --> B[Convert to Images]
+flowchart LR
+    A([PDF Input]) --> B
+    
+    subgraph B[Image Processing]
+      B1[PDF to Images] --> B2[Grayscale] --> B3[Denoise] --> B4[Threshold]
     end
     
-    subgraph Image_Enhancement
-        B --> C[Convert to Grayscale]
-        C --> D[Apply Denoising]
-        D --> E[Apply Thresholding]
+    B --> C
+    
+    subgraph C[Box Detection]
+      C1[Find Contours] --> C2[Extract Regions] --> C3[Remove Watermarks]
     end
     
-    subgraph Box_Detection
-        E --> F[Find Contours]
-        F --> G[Filter by Size]
-        G --> H[Extract Box Regions]
+    C --> D
+    
+    subgraph D[Text Extraction]
+      D1[Identify Text Areas] --> D2[OCR Processing] --> D3[Raw Text Data]
     end
     
-    subgraph Watermark_Removal
-        H --> I[Create Binary Mask]
-        I --> J[Inpaint Image]
+    D --> E
+    
+    subgraph E[Data Transformation]
+      E1[Clean Text] --> E2[Extract Fields] --> E3[Structure Data]
     end
     
-    subgraph Text_Extraction
-        J --> K[Extract Number Region]
-        J --> L[Extract EPIC Number]
-        J --> M[Extract Voter Info]
-    end
+    E --> F([Final Output])
     
-    subgraph Data_Processing
-        K --> N[Clean & Format Data]
-        L --> N
-        M --> N
-        N --> O[Structure as DataFrame]
-        O --> P[Export to CSV/Excel]
-    end
-    
-    style A fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style B fill:#fdffb6,stroke:#333,stroke-width:1px
-    style C fill:#caffbf,stroke:#333,stroke-width:1px
-    style D fill:#9bf6ff,stroke:#333,stroke-width:1px
-    style E fill:#bdb2ff,stroke:#333,stroke-width:1px
-    style F fill:#ffc6ff,stroke:#333,stroke-width:1px
-    style G fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style H fill:#fdffb6,stroke:#333,stroke-width:1px
-    style I fill:#caffbf,stroke:#333,stroke-width:1px
-    style J fill:#9bf6ff,stroke:#333,stroke-width:1px
-    style K fill:#bdb2ff,stroke:#333,stroke-width:1px
-    style L fill:#ffc6ff,stroke:#333,stroke-width:1px
-    style M fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style N fill:#fdffb6,stroke:#333,stroke-width:1px
-    style O fill:#caffbf,stroke:#333,stroke-width:1px
-    style P fill:#9bf6ff,stroke:#333,stroke-width:1px
+    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style B fill:#d0e8f2,stroke:#333,stroke-width:1px
+    style C fill:#d5f5e3,stroke:#333,stroke-width:1px
+    style D fill:#fcf3cf,stroke:#333,stroke-width:1px
+    style E fill:#fadbd8,stroke:#333,stroke-width:1px
+    style F fill:#f9d5e5,stroke:#333,stroke-width:2px
 ```
 
 ## Key Features
