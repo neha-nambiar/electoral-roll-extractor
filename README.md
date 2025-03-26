@@ -8,49 +8,60 @@ This tool automatically extracts voter information from scanned electoral roll P
 
 ```mermaid
 flowchart TD
-    A([<b>Electoral Roll PDF</b>]) --> B
+    classDef mainNode fill:#f5b041,stroke:#333,stroke-width:2px,color:#333,font-weight:bold,rounded:10px
+    classDef processNode fill:white,stroke:#333,stroke-width:1px,color:#333,font-weight:bold,rounded:8px
+    classDef techNode fill:#f8f9fa,stroke:#ddd,stroke-width:1px,color:#555,font-weight:bold,font-style:italic,rounded:8px
+    classDef subgraphStyle fill:transparent,stroke:#aaa,stroke-width:1px,color:#555,font-weight:bold,rounded:15px
     
-    subgraph B[<b>Image Processing</b>]
-      B1[<b>PDF to Images<br>Grayscale Conversion<br>Noise Reduction<br>Binary Thresholding</b>]
-      B2[<b>Technologies:<br>PDF2Image, Poppler<br>OpenCV, Pillow</b>]
-      B1 --- B2
+    A([Electoral Roll PDF]) ==> B
+    
+    subgraph B["🔍 Image Processing"]
+      direction LR
+      B1["PDF to Images<br>Grayscale Conversion<br>Noise Reduction<br>Binary Thresholding"]
+      B2["Technologies:<br>PDF2Image, Poppler<br>OpenCV, Pillow"]
+      B1 -.- B2
     end
     
-    B --> C
+    B ==> C
     
-    subgraph C[<b>Box Detection</b>]
-      C1[<b>Contour Detection<br>Region Extraction<br>Watermark Removal</b>]
-      C2[<b>Technologies:<br>OpenCV, NumPy</b>]
-      C1 --- C2
+    subgraph C["📦 Box Detection"]
+      direction LR
+      C1["Contour Detection<br>Region Extraction<br>Watermark Removal"]
+      C2["Technologies:<br>OpenCV, NumPy"]
+      C1 -.- C2
     end
     
-    C --> D
+    C ==> D
     
-    subgraph D[<b>Text Extraction</b>]
-      D1[<b>Region Identification<br>OCR Processing<br>Text Collection</b>]
-      D2[<b>Technologies:<br>Tesseract</b>]
-      D1 --- D2
+    subgraph D["📝 Text Extraction"]
+      direction LR
+      D1["Region Identification<br>OCR Processing<br>Text Collection"]
+      D2["Technologies:<br>Tesseract"]
+      D1 -.- D2
     end
     
-    D --> E
+    D ==> E
     
-    subgraph E[<b>Data Processing</b>]
-      E1[<b>Text Cleaning<br>Field Extraction<br>Data Structuring</b>]
-      E2[<b>Technologies:<br>Pandas, RegEx</b>]
-      E1 --- E2
+    subgraph E["🔄 Data Processing"]
+      direction LR
+      E1["Text Cleaning<br>Field Extraction<br>Data Structuring"]
+      E2["Technologies:<br>Pandas, RegEx"]
+      E1 -.- E2
     end
     
-    E --> F([<b>Structured Output</b>])
+    E ==> F([Structured Output])
     
-    style A fill:#f5b041,stroke:#333,stroke-width:2px
-    style F fill:#f5b041,stroke:#333,stroke-width:2px
-    style B fill:#82e0aa,stroke:#333,stroke-width:1px
-    style C fill:#85c1e9,stroke:#333,stroke-width:1px
-    style D fill:#bb8fce,stroke:#333,stroke-width:1px
-    style E fill:#f7dc6f,stroke:#333,stroke-width:1px
+    %% Apply custom styles
+    class A,F mainNode
+    class B1,C1,D1,E1 processNode
+    class B2,C2,D2,E2 techNode
+    class B,C,D,E subgraphStyle
     
-    classDef subboxes fill:white,stroke:#ddd,stroke-width:1px
-    class B1,B2,C1,C2,D1,D2,E1,E2 subboxes
+    %% Color the main process boxes
+    style B color:#1e8449,stroke:#1e8449
+    style C color:#2874a6,stroke:#2874a6
+    style D color:#7d3c98,stroke:#7d3c98
+    style E color:#b9770e,stroke:#b9770e
 ```
 
 ## Key Features
@@ -108,7 +119,6 @@ electoral-roll-extractor/
 │   ├── image_processor.py     # Image processing functions
 │   ├── text_extractor.py      # OCR and text extraction
 │   ├── data_processor.py      # Data processing and formatting
-│   └── utils.py               # Utility functions
 └── data/                      # Data directory for input/output
     ├── input/                 # Input PDF files
     ├── output/                # Processed data output
