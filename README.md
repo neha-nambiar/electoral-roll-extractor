@@ -4,42 +4,53 @@
 
 This tool automatically extracts voter information from scanned electoral roll PDFs and converts it into structured data formats (CSV/Excel) for easy analysis and use.
 
-## System Workflow
+## System Workflow and Technology Stack
 
 ```mermaid
-flowchart LR
-    A([PDF Input]) --> B
+flowchart TD
+    A([<b>Electoral Roll PDF</b>]) --> B
     
-    subgraph B[Image Processing]
-      B1[PDF to Images] --> B2[Grayscale] --> B3[Denoise] --> B4[Threshold]
+    subgraph B[<b>Image Processing</b>]
+      B1[<b>PDF to Images<br>Grayscale Conversion<br>Noise Reduction<br>Binary Thresholding</b>]
+      B2[<b>Technologies:<br>PDF2Image, Poppler<br>OpenCV, Pillow</b>]
+      B1 --- B2
     end
     
     B --> C
     
-    subgraph C[Box Detection]
-      C1[Find Contours] --> C2[Extract Regions] --> C3[Remove Watermarks]
+    subgraph C[<b>Box Detection</b>]
+      C1[<b>Contour Detection<br>Region Extraction<br>Watermark Removal</b>]
+      C2[<b>Technologies:<br>OpenCV, NumPy</b>]
+      C1 --- C2
     end
     
     C --> D
     
-    subgraph D[Text Extraction]
-      D1[Identify Text Areas] --> D2[OCR Processing] --> D3[Raw Text Data]
+    subgraph D[<b>Text Extraction</b>]
+      D1[<b>Region Identification<br>OCR Processing<br>Text Collection</b>]
+      D2[<b>Technologies:<br>Tesseract</b>]
+      D1 --- D2
     end
     
     D --> E
     
-    subgraph E[Data Transformation]
-      E1[Clean Text] --> E2[Extract Fields] --> E3[Structure Data]
+    subgraph E[<b>Data Processing</b>]
+      E1[<b>Text Cleaning<br>Field Extraction<br>Data Structuring</b>]
+      E2[<b>Technologies:<br>Pandas, RegEx</b>]
+      E1 --- E2
     end
     
-    E --> F([Final Output])
+    E --> F([<b>Structured Output</b>])
     
-    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style B fill:#d0e8f2,stroke:#333,stroke-width:1px
-    style C fill:#d5f5e3,stroke:#333,stroke-width:1px
-    style D fill:#fcf3cf,stroke:#333,stroke-width:1px
-    style E fill:#fadbd8,stroke:#333,stroke-width:1px
-    style F fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style A fill:#f5b041,stroke:#333,stroke-width:2px
+    style F fill:#f5b041,stroke:#333,stroke-width:2px
+    style B fill:#82e0aa,stroke:#333,stroke-width:1px
+    style C fill:#85c1e9,stroke:#333,stroke-width:1px
+    style D fill:#bb8fce,stroke:#333,stroke-width:1px
+    style E fill:#f7dc6f,stroke:#333,stroke-width:1px
+    
+    classDef subboxes fill:white,stroke:#ddd,stroke-width:1px
+    class B1,B2,C1,C2,D1,D2,E1,E2 subboxes
 ```
 
 ## Key Features
@@ -50,26 +61,6 @@ flowchart LR
 - **Structured Output** - Organized data in CSV/Excel format
 - **Easy Configuration** - Customizable for different electoral roll formats
 
-## Technology Stack
-
-```mermaid
-flowchart LR
-    A[Electoral Roll Extractor] --> B[Image Processing]
-    A --> C[OCR Engine]
-    A --> D[Data Processing]
-    A --> E[I/O Handling]
-    
-    B --> B1[OpenCV • NumPy • Pillow]
-    C --> C1[Tesseract • PyTesseract]
-    D --> D1[Pandas • RegEx]
-    E --> E1[PDF2Image • Poppler]
-    
-    style A fill:#f5b041,stroke:#333,stroke-width:2px
-    style B fill:#82e0aa,stroke:#333,stroke-width:1px
-    style C fill:#85c1e9,stroke:#333,stroke-width:1px
-    style D fill:#bb8fce,stroke:#333,stroke-width:1px
-    style E fill:#f7dc6f,stroke:#333,stroke-width:1px
-```
 
 ## 📋 Requirements
 
