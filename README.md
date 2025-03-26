@@ -13,7 +13,7 @@ flowchart TD
     classDef techNode fill:#f8f9fa,stroke:#ddd,stroke-width:1px,color:#555,font-weight:bold,font-style:italic,rounded:8px
     classDef subgraphStyle fill:transparent,stroke:#aaa,stroke-width:1px,color:#555,font-weight:bold,rounded:15px
     
-    A([Electoral Roll PDF]) ==> B
+    A([Electoral Roll raw PDF]) ==> B
     
     subgraph B["🔍 Image Processing"]
       direction LR
@@ -49,7 +49,7 @@ flowchart TD
       E1 -.- E2
     end
     
-    E ==> F([Structured Output])
+    E ==> F([Structured CSV Output])
     
     %% Apply custom styles
     class A,F mainNode
