@@ -7,19 +7,58 @@ This tool automatically extracts voter information from scanned electoral roll P
 ### System Workflow
 
 ```mermaid
-graph TB
-    A[Electoral Roll PDF] -->|PDF to Images| B[Image Preprocessing]
-    B -->|Enhanced Images| C[Box Detection]
-    C -->|Voter Boxes| D[Text Extraction & OCR]
-    D -->|Raw Text Data| E[Data Cleaning & Structuring]
-    E -->|Processed Data| F[CSV/Excel Export]
+flowchart TD
+    subgraph PDF_Processing
+        A[Load PDF] --> B[Convert to Images]
+    end
     
-    style A fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style B fill:#eeeeee,stroke:#333,stroke-width:2px
-    style C fill:#d0e8f2,stroke:#333,stroke-width:2px
-    style D fill:#d5f5e3,stroke:#333,stroke-width:2px
-    style E fill:#fcf3cf,stroke:#333,stroke-width:2px
-    style F fill:#fadbd8,stroke:#333,stroke-width:2px
+    subgraph Image_Enhancement
+        B --> C[Convert to Grayscale]
+        C --> D[Apply Denoising]
+        D --> E[Apply Thresholding]
+    end
+    
+    subgraph Box_Detection
+        E --> F[Find Contours]
+        F --> G[Filter by Size]
+        G --> H[Extract Box Regions]
+    end
+    
+    subgraph Watermark_Removal
+        H --> I[Create Binary Mask]
+        I --> J[Inpaint Image]
+    end
+    
+    subgraph Text_Extraction
+        J --> K[Extract Number Region]
+        J --> L[Extract EPIC Number]
+        J --> M[Extract Voter Info]
+    end
+    
+    subgraph Data_Processing
+        K --> N[Clean & Format Data]
+        L --> N
+        M --> N
+        N --> O[Structure as DataFrame]
+        O --> P[Export to CSV/Excel]
+    end
+    
+    style A fill:#ffd6a5,stroke:#333,stroke-width:1px
+    style B fill:#fdffb6,stroke:#333,stroke-width:1px
+    style C fill:#caffbf,stroke:#333,stroke-width:1px
+    style D fill:#9bf6ff,stroke:#333,stroke-width:1px
+    style E fill:#bdb2ff,stroke:#333,stroke-width:1px
+    style F fill:#ffc6ff,stroke:#333,stroke-width:1px
+    style G fill:#ffd6a5,stroke:#333,stroke-width:1px
+    style H fill:#fdffb6,stroke:#333,stroke-width:1px
+    style I fill:#caffbf,stroke:#333,stroke-width:1px
+    style J fill:#9bf6ff,stroke:#333,stroke-width:1px
+    style K fill:#bdb2ff,stroke:#333,stroke-width:1px
+    style L fill:#ffc6ff,stroke:#333,stroke-width:1px
+    style M fill:#ffd6a5,stroke:#333,stroke-width:1px
+    style N fill:#fdffb6,stroke:#333,stroke-width:1px
+    style O fill:#caffbf,stroke:#333,stroke-width:1px
+    style P fill:#9bf6ff,stroke:#333,stroke-width:1px
 ```
 
 ## Key Features
@@ -84,62 +123,6 @@ TESSERACT_CMD = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 POPPLER_PATH = r'path\to\poppler\bin'
 ```
 
-## 🔍 How It Works
-
-```mermaid
-flowchart TD
-    subgraph PDF_Processing
-        A[Load PDF] --> B[Convert to Images]
-    end
-    
-    subgraph Image_Enhancement
-        B --> C[Convert to Grayscale]
-        C --> D[Apply Denoising]
-        D --> E[Apply Thresholding]
-    end
-    
-    subgraph Box_Detection
-        E --> F[Find Contours]
-        F --> G[Filter by Size]
-        G --> H[Extract Box Regions]
-    end
-    
-    subgraph Watermark_Removal
-        H --> I[Create Binary Mask]
-        I --> J[Inpaint Image]
-    end
-    
-    subgraph Text_Extraction
-        J --> K[Extract Number Region]
-        J --> L[Extract EPIC Number]
-        J --> M[Extract Voter Info]
-    end
-    
-    subgraph Data_Processing
-        K --> N[Clean & Format Data]
-        L --> N
-        M --> N
-        N --> O[Structure as DataFrame]
-        O --> P[Export to CSV/Excel]
-    end
-    
-    style A fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style B fill:#fdffb6,stroke:#333,stroke-width:1px
-    style C fill:#caffbf,stroke:#333,stroke-width:1px
-    style D fill:#9bf6ff,stroke:#333,stroke-width:1px
-    style E fill:#bdb2ff,stroke:#333,stroke-width:1px
-    style F fill:#ffc6ff,stroke:#333,stroke-width:1px
-    style G fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style H fill:#fdffb6,stroke:#333,stroke-width:1px
-    style I fill:#caffbf,stroke:#333,stroke-width:1px
-    style J fill:#9bf6ff,stroke:#333,stroke-width:1px
-    style K fill:#bdb2ff,stroke:#333,stroke-width:1px
-    style L fill:#ffc6ff,stroke:#333,stroke-width:1px
-    style M fill:#ffd6a5,stroke:#333,stroke-width:1px
-    style N fill:#fdffb6,stroke:#333,stroke-width:1px
-    style O fill:#caffbf,stroke:#333,stroke-width:1px
-    style P fill:#9bf6ff,stroke:#333,stroke-width:1px
-```
 
 ### Project Structure
 
