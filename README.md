@@ -66,9 +66,8 @@ flowchart TD
 
 ## Key Features
 
-- **Automated Data Extraction** - Extract voter details from PDF electoral rolls
+- **Automated Data Extraction** - Extracts voter details from PDF electoral rolls
 - **Image Enhancement** - Pre-processing for improved OCR accuracy  
-- **Watermark Removal** - Clean scanned documents automatically
 - **Structured Output** - Organized data in CSV/Excel format
 - **Easy Configuration** - Customizable for different electoral roll formats
 
