@@ -1,4 +1,4 @@
-Electoral Roll Extractor
+# Electoral Roll Extractor
 
 > Extract, process, and structure voter information from electoral roll PDFs with high accuracy.
 
@@ -33,24 +33,16 @@ graph TB
 ## Technology Stack
 
 ```mermaid
-graph TD
+flowchart LR
     A[Electoral Roll Extractor] --> B[Image Processing]
     A --> C[OCR Engine]
     A --> D[Data Processing]
-    A --> E[Input/Output]
+    A --> E[I/O Handling]
     
-    B --> B1[OpenCV]
-    B --> B2[NumPy]
-    B --> B3[PIL/Pillow]
-    
-    C --> C1[Tesseract OCR]
-    C --> C2[PyTesseract]
-    
-    D --> D1[Pandas]
-    D --> D2[Regular Expressions]
-    
-    E --> E1[PDF2Image]
-    E --> E2[Poppler]
+    B --> B1[OpenCV • NumPy • Pillow]
+    C --> C1[Tesseract • PyTesseract]
+    D --> D1[Pandas • RegEx]
+    E --> E1[PDF2Image • Poppler]
     
     style A fill:#f5b041,stroke:#333,stroke-width:2px
     style B fill:#82e0aa,stroke:#333,stroke-width:1px
