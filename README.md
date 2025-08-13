@@ -83,16 +83,13 @@ flowchart TD
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/electoral-roll-extractor.git
+git clone https://github.com/neha-nambiar/electoral-roll-extractor.git
 cd electoral-roll-extractor
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Install Tesseract OCR and Poppler (system-specific)
-# Windows: Download from respective websites
-# Linux: sudo apt install tesseract-ocr poppler-utils
-# macOS: brew install tesseract poppler
+# Install Tesseract OCR and Poppler
 ```
 
 ### Configuration
